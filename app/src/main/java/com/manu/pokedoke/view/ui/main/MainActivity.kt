@@ -36,8 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         //Create an observer which updates UI in after network calls
         viewModel.pokemonLiveData.observe(this, Observer<List<Pokemon>> {pokemonData ->
-            pokemon_name_text_view.text = pokemonData[0]?.name
-            pokemon_image_view.load(pokemonData[0]?.getImageUrl())
+//            pokemon_name_text_view.text = pokemonData[0]?.name
+//            pokemon_image_view.load(pokemonData[0]?.getImageUrl())
+            pokemonListAdapter.setPokemonList(pokemonData)
         })
     }
 
