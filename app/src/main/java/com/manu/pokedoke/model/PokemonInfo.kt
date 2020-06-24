@@ -7,7 +7,6 @@ import kotlin.random.Random
 
 
 @Entity
-//@JsonClass(generateAdapter = true)
 data class PokemonInfo(
     @field:Json(name = "id") @PrimaryKey val id: Int,
     @field:Json(name = "name") val name: String,
@@ -30,14 +29,11 @@ data class PokemonInfo(
     fun getSpeedString(): String = "$speed/$maxSpeed"
     fun getExpString(): String = "$exp/$maxExp"
 
-
-//    @JsonClass(generateAdapter = true)
     data class TypeResponse(
         @field:Json(name = "slot") val slot: Int,
         @field:Json(name = "type") val type: Type
     )
 
-//    @JsonClass(generateAdapter = true)
     data class Type(
         @field:Json(name = "name") val name: String
     )

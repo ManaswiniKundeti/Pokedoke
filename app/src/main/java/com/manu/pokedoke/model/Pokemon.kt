@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 @Entity
-//@JsonClass(generateAdapter = true)
 data class Pokemon(
     var page: Int = 0,
     @field:Json(name = "name") @PrimaryKey val name: String,

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_pokemon_list.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewmodelFactory by lazy { MainActivityViewModelFactory() }
+    private val viewmodelFactory by lazy { MainActivityViewModelFactory(this) }
     private val viewModel: MainActivityViewModel by viewModels {
         viewmodelFactory
     }

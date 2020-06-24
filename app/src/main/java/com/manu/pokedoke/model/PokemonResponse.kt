@@ -2,7 +2,6 @@ package com.manu.pokedoke.model
 
 import com.squareup.moshi.Json
 
-//@JsonClass(generateAdapter = true)
 data class PokemonResponse(
     @field:Json(name = "count") val count: Int,
     @field:Json(name = "next") val next: String?,
