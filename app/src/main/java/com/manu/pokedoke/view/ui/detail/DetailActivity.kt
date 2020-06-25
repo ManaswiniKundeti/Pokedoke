@@ -41,7 +41,30 @@ class DetailActivity : AppCompatActivity() {
                 type_name_one.text = pokemonInfo.types[0].type.name
                 type_name_two.text = pokemonInfo.types[1].type.name
             }
-            
+            height.text = pokemonInfo.getHeightString()
+            weight.text = pokemonInfo.getWeightString()
+//            weight.text =  pokemonInfo.hp.toString()
+
+            progress_hp.labelText = pokemonInfo.getHpString()
+            progress_hp.max = PokemonInfo.maxHp.toFloat()
+            progress_hp.progress = pokemonInfo.getHp().toFloat()
+
+            progress_attack.labelText = pokemonInfo.getAttackString()
+            progress_attack.max = PokemonInfo.maxAttack.toFloat()
+            progress_attack.progress = pokemonInfo.getAttack().toFloat()
+
+            progress_defense.labelText = pokemonInfo.getDefenseString()
+            progress_defense.max = PokemonInfo.maxDefense.toFloat()
+            progress_defense.progress = pokemonInfo.getDefense().toFloat()
+
+            progress_speed.labelText = pokemonInfo.getSpeedString()
+            progress_speed.max = PokemonInfo.maxSpeed.toFloat()
+            progress_speed.progress = pokemonInfo.getSpeed().toFloat()
+
+            progress_exp.labelText = pokemonInfo.getExpString()
+            progress_exp.max = PokemonInfo.maxExp.toFloat()
+            progress_exp.progress = pokemonInfo.getExp().toFloat()
+
         })
 
         viewModel.fetchPokemonDetails(nameFromMainActivity)
