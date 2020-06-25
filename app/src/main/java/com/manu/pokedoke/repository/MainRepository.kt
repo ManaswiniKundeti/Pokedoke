@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manu.pokedoke.model.Pokemon
+import com.manu.pokedoke.model.PokemonInfo
 import com.manu.pokedoke.model.PokemonResponse
 import com.manu.pokedoke.network.IPokemonService
 import com.manu.pokedoke.persistence.PokemonDao
@@ -13,7 +14,7 @@ import retrofit2.Response
 
 class MainRepository(
     private val pokemonService: IPokemonService,
-    private val pokemonDao : PokemonDao): IRepository {
+    private val pokemonDao : PokemonDao): IMainRepository {
 
     private val TAG = MainRepository::class.java.simpleName
 
@@ -21,8 +22,9 @@ class MainRepository(
     private val _pokemonListLiveData : MutableLiveData<List<Pokemon>> = MutableLiveData()
     val pokemonListLiveData : LiveData<List<Pokemon>> = _pokemonListLiveData
 
+
+
     override fun getPokemonList() {
-//        var pokemonList = pokemonDao.getPokemons()
 
         pokemonService.fetchPokemonList().enqueue(object : Callback<PokemonResponse>{
             /**

@@ -5,10 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.manu.pokedoke.network.createPokemonService
 import com.manu.pokedoke.persistence.AppDatabase
+import com.manu.pokedoke.repository.DetailRepository
 import com.manu.pokedoke.repository.MainRepository
 import java.lang.IllegalArgumentException
 
-class MainActivityViewModelFactory(private val context: Context) :ViewModelProvider.Factory {
+class DetailActivityViewModelFactory(private val context :Context) :ViewModelProvider.Factory{
     /**
      * Creates a new instance of the given `Class`.
      *
@@ -19,8 +20,8 @@ class MainActivityViewModelFactory(private val context: Context) :ViewModelProvi
      * @return a newly created ViewModel
     </T> */
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(MainActivityViewModel::class.java)){
-            return MainActivityViewModel(MainRepository(createPokemonService(), AppDatabase.getAppDatabase(context)!!.pokemonDao())) as T
+        if(modelClass.isAssignableFrom(DetailActivityViewModel::class.java)){
+            return DetailActivityViewModel(DetailRepository(createPokemonService())) as T
         }
         throw IllegalArgumentException("Unknown view model class")
     }

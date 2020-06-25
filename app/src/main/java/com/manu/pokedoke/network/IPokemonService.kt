@@ -1,11 +1,13 @@
 package com.manu.pokedoke.network
 
+import com.manu.pokedoke.model.PokemonInfo
 import com.manu.pokedoke.model.PokemonResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 fun createPokemonService() : IPokemonService {
@@ -30,4 +32,9 @@ interface IPokemonService {
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0
     ): Call<PokemonResponse>
+
+    @GET("pokemon/{name}")
+    fun fetchPokemonDetails(
+        @Path("name")
+        name : String) : Call<PokemonInfo>
 }

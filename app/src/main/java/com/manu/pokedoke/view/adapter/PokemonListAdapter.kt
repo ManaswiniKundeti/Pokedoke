@@ -1,6 +1,6 @@
 package com.manu.pokedoke.view.adapter
 
-import android.content.ClipData
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.manu.pokedoke.R
 import com.manu.pokedoke.model.Pokemon
+import com.manu.pokedoke.view.ui.detail.DetailActivity
+import com.manu.pokedoke.view.ui.main.MainActivity
 import kotlinx.android.synthetic.main.item_pokemon_list.view.*
 
 class PokemonListItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -17,7 +19,7 @@ class PokemonListItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemV
     }
 }
 
-class PokemonListAdapter() : RecyclerView.Adapter<PokemonListItemViewHolder>(){
+class PokemonListAdapter(private val mainActivity: MainActivity) : RecyclerView.Adapter<PokemonListItemViewHolder>(){
     private var listOfPokemons = listOf<Pokemon>()
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -80,6 +82,12 @@ class PokemonListAdapter() : RecyclerView.Adapter<PokemonListItemViewHolder>(){
     override fun onBindViewHolder(holder: PokemonListItemViewHolder, position: Int) {
         val pokemonViewHolder = holder
         pokemonViewHolder.bindView(listOfPokemons[position])
+        pokemonViewHolder.itemView.setOnClickListener {
+            val intent = Intent(mainActivity, DetailActivity::class.java)
+            intent.putExtra("pokemon_name", listOfPokemons[position].name)
+            intent.putExtra("pokemon_image_url", listOfPokemons[position].getImageUrl())
+            mainActivity.startActivity(intent)
+        }
     }
 
     fun setPokemonList(listOfPokemons : List<Pokemon>){

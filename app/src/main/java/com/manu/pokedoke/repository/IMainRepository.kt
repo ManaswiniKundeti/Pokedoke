@@ -1,5 +1,6 @@
 package com.manu.pokedoke.repository
 
-interface IRepository {
+interface IMainRepository {
     fun getPokemonList()
+
 }

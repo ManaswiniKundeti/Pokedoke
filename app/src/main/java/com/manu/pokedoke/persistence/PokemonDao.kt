@@ -7,7 +7,7 @@ import com.manu.pokedoke.model.Pokemon
 @Dao
 interface PokemonDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPokemons(pokemons : List<Pokemon>)
 
     @Update
