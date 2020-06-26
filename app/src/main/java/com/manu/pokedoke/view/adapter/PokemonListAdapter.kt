@@ -1,9 +1,11 @@
 package com.manu.pokedoke.view.adapter
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.bumptech.glide.Glide
@@ -56,10 +58,16 @@ class PokemonListAdapter(private val mainActivity: MainActivity) : RecyclerView.
         val pokemonViewHolder = holder
         pokemonViewHolder.bindView(listOfPokemons[position])
         pokemonViewHolder.itemView.setOnClickListener {
+            val options = ActivityOptions
+                .makeSceneTransitionAnimation(mainActivity,
+                    pokemonViewHolder.itemView.findViewById<ImageView>(R.id.pokemon_image_view), "transition_pokemon")
+
             val intent = Intent(mainActivity, DetailActivity::class.java)
             intent.putExtra("pokemon_name", listOfPokemons[position].name)
             intent.putExtra("pokemon_image_url", listOfPokemons[position].getImageUrl())
-            mainActivity.startActivity(intent)
+
+            // start the new activity
+            mainActivity.startActivity(intent, options.toBundle())
         }
     }
 

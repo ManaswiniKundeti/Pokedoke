@@ -75,7 +75,6 @@ class DetailActivity : AppCompatActivity() {
             }
             height.text = pokemonInfo.getHeightString()
             weight.text = pokemonInfo.getWeightString()
-//            weight.text =  pokemonInfo.hp.toString()
 
             progress_hp.labelText = pokemonInfo.getHpString()
             progress_hp.max = PokemonInfo.maxHp.toFloat()
