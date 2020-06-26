@@ -1,12 +1,15 @@
 package com.manu.pokedoke.view.ui.main
 
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.manu.pokedoke.R
+import com.manu.pokedoke.extensions.changeColor
 import com.manu.pokedoke.model.Pokemon
 import com.manu.pokedoke.view.adapter.PokemonListAdapter
 import com.manu.pokedoke.viewmodels.MainActivityViewModel
@@ -34,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             pokemonListAdapter.setPokemonList(pokemonData)
         })
 
-
-
+        changeColor(getColor(R.color.colorPrimary))
     }
 }
