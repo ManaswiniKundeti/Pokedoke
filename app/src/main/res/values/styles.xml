@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Theme without ActionBar shadow (inherits main theme) -->
+    <style name="DetailActivityStyle" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <style name="TextStyle" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:gravity">center</item>
