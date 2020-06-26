@@ -45,11 +45,6 @@ class PokemonListAdapter(private val mainActivity: MainActivity) : RecyclerView.
         return PokemonListItemViewHolder(itemView)
     }
 
-    /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
-     */
     override fun getItemCount(): Int {
         return listOfPokemons.size
     }
