@@ -1,19 +1,25 @@
 package com.manu.pokedoke.view.ui.main
 
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.manu.pokedoke.R
 import com.manu.pokedoke.extensions.changeColor
+import com.manu.pokedoke.extensions.hide
+import com.manu.pokedoke.extensions.show
 import com.manu.pokedoke.model.Pokemon
 import com.manu.pokedoke.view.adapter.PokemonListAdapter
 import com.manu.pokedoke.viewmodels.MainActivityViewModel
 import com.manu.pokedoke.viewmodels.MainActivityViewModelFactory
+import com.manu.pokedoke.viewstate.Error
+import com.manu.pokedoke.viewstate.Loading
+import com.manu.pokedoke.viewstate.Success
+import com.manu.pokedoke.viewstate.ViewState
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +39,21 @@ class MainActivity : AppCompatActivity() {
         pokemonList.adapter = pokemonListAdapter
 
         //Create an observer which updates UI in after network calls
-        viewModel.pokemonLiveData.observe(this, Observer<List<Pokemon>> {pokemonData ->
-            pokemonListAdapter.setPokemonList(pokemonData)
+        viewModel.pokemonLiveData.observe(this, Observer<ViewState<List<Pokemon>>> { viewState ->
+            when (viewState) {
+                is Success -> {
+                    main_progress_bar.hide()
+                    pokemonListAdapter.setPokemonList(viewState.data)
+                }
+                is Error -> {
+                    main_progress_bar.hide()
+                    Toast.makeText(this, viewState.errMsg, Toast.LENGTH_SHORT).show()
+                }
+                is Loading -> {
+                    main_progress_bar.show()
+                }
+            }
+
         })
 
         changeColor(getColor(R.color.colorPrimary))

@@ -9,6 +9,10 @@ import com.manu.pokedoke.model.PokemonInfo
 import com.manu.pokedoke.model.PokemonResponse
 import com.manu.pokedoke.network.IPokemonService
 import com.manu.pokedoke.persistence.PokemonDao
+import com.manu.pokedoke.viewstate.Error
+import com.manu.pokedoke.viewstate.Loading
+import com.manu.pokedoke.viewstate.Success
+import com.manu.pokedoke.viewstate.ViewState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,18 +25,23 @@ class MainRepository(
     private val TAG = MainRepository::class.java.simpleName
 
     /** LIVE DATA **/
-    private val _pokemonListLiveData : MutableLiveData<List<Pokemon>> = MutableLiveData()
-    val pokemonListLiveData : LiveData<List<Pokemon>> = _pokemonListLiveData
+    private val _pokemonListLiveData : MutableLiveData<ViewState<List<Pokemon>>> = MutableLiveData()
+    val pokemonListLiveData :LiveData<ViewState<List<Pokemon>>> = _pokemonListLiveData
 
     override fun getPokemonList() {
         FetchPokemonListTask(_pokemonListLiveData, pokemonService, pokemonDao).execute()
     }
 
-    class FetchPokemonListTask(private val pokemonLiveData: MutableLiveData<List<Pokemon>>,
+    class FetchPokemonListTask(private val pokemonLiveData: MutableLiveData<ViewState<List<Pokemon>>>,
         private val pokemonService: IPokemonService,
         private val pokemonDao: PokemonDao): AsyncTask<Void, Void, List<Pokemon>>() {
 
         private val TAG = FetchPokemonListTask::class.java.simpleName
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            pokemonLiveData.value = Loading
+        }
 
         override fun doInBackground(vararg p0: Void?): List<Pokemon>? {
             return try {
@@ -52,7 +61,11 @@ class MainRepository(
 
         override fun onPostExecute(result: List<Pokemon>?) {
             super.onPostExecute(result)
-            pokemonLiveData.postValue(result)
+            if (result == null) {
+                pokemonLiveData.value = Error("Error fetching list of pokemon")
+            } else {
+                pokemonLiveData.value = Success(result)
+            }
         }
     }
 

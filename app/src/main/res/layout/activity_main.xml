@@ -17,4 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_pokemon_list" />
 
+    <ProgressBar
+        android:id="@+id/main_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pokemon_list"
+        tools:visibility="visible"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
