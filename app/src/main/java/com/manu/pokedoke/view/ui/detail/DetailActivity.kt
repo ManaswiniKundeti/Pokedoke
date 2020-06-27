@@ -53,7 +53,9 @@ class DetailActivity : AppCompatActivity() {
                     .intoCallBack { palette ->
                         val rgb = palette?.dominantSwatch?.rgb
                         if (rgb != null) {
-                            pokemon_image_layout.setBackgroundColor(rgb)
+                            if(!resources.getBoolean(R.bool.is_tablet)){
+                                pokemon_image_layout.setBackgroundColor(rgb)
+                            }
                             changeColor(rgb)
                         }
                     }
