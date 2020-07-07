@@ -58,8 +58,8 @@ class PokemonListAdapter(private val mainActivity: MainActivity) : RecyclerView.
                     pokemonViewHolder.itemView.findViewById<ImageView>(R.id.pokemon_image_view), "transition_pokemon")
 
             val intent = Intent(mainActivity, DetailActivity::class.java)
-            intent.putExtra("pokemon_name", listOfPokemons[position].name)
-            intent.putExtra("pokemon_image_url", listOfPokemons[position].getImageUrl())
+            intent.putExtra(DetailActivity.ARG_POKEMON_NAME, listOfPokemons[position].name)
+            intent.putExtra(DetailActivity.ARG_POKEMON_IMAGE_URL, listOfPokemons[position].getImageUrl())
 
             // start the new activity
             mainActivity.startActivity(intent, options.toBundle())

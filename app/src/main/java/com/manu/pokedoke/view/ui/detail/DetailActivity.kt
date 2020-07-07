@@ -1,15 +1,10 @@
 package com.manu.pokedoke.view.ui.detail
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
@@ -35,6 +30,11 @@ class DetailActivity : AppCompatActivity() {
         viewmodelFactory
     }
 
+    companion object {
+        const val ARG_POKEMON_NAME = "pokemon_name"
+        const val ARG_POKEMON_IMAGE_URL = "pokemon_image_url"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -42,8 +42,8 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0f
 
         val intent: Intent = intent
-        val nameFromMainActivity = intent.getStringExtra("pokemon_name") ?: "pikachu"
-        val imageUrl = intent.getStringExtra("pokemon_image_url")
+        val nameFromMainActivity = intent.getStringExtra(ARG_POKEMON_NAME) ?: "pikachu"
+        val imageUrl = intent.getStringExtra(ARG_POKEMON_IMAGE_URL)
 
         Glide.with(this)
             .load(imageUrl)

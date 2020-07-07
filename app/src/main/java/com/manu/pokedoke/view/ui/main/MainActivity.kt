@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val pokemonList: RecyclerView = findViewById(R.id.pokemon_list)
+        val pokemonList: RecyclerView = findViewById(R.id.pokemon_recycler_view)
         pokemonList.layoutManager = GridLayoutManager(this, 2)
 
         val pokemonListAdapter = PokemonListAdapter(this)
