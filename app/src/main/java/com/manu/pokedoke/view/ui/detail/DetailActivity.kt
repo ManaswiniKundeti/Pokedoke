@@ -68,13 +68,13 @@ class DetailActivity : AppCompatActivity() {
                 is Success -> {
                     detail_progress_bar.hide()
                     val pokemonInfo = viewState.data
-                    if(pokemonInfo.types.size == 1){
+                    if(pokemonInfo.types.size == 1) {
                         type_name_one.show()
                         type_name_one.text = pokemonInfo.types[0].type.name
                         type_name_one.setBackgroundColor(getColor(pokemonInfo.types[0].type.name.getTypeColor()))
 
                         type_name_two.hide()
-                    }else{
+                    }else {
                         type_name_one.show()
                         type_name_one.text = pokemonInfo.types[0].type.name
                         type_name_one.setBackgroundColor(getColor(pokemonInfo.types[0].type.name.getTypeColor()))
